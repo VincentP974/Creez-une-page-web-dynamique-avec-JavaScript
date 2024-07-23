@@ -119,6 +119,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					return response.json();
 				}
 			})
+			.then(function (data) {
+				let works = data;
+				// Removing old works
+				document.querySelector('#modal-works.modal-gallery .modal-content').innerText = '';
 
-
-	}
+			}
