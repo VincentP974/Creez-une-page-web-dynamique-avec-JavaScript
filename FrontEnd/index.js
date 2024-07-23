@@ -85,6 +85,8 @@ fetch("http://localhost:5678/api/categories")
 document.addEventListener('DOMContentLoaded', function () {
 	// Check token et userId pour vérifier si ils sont bien dans le localStorage
 	if (localStorage.getItem('token') != null && localStorage.getItem('userId') != null) {
+		//    change le visuel de la page en admin mode
+		document.querySelector('body').classList.add('connected');
 
 	}
 }
