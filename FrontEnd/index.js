@@ -80,3 +80,5 @@ fetch("http://localhost:5678/api/categories")
 	.catch(function (err) {
 		console.log(err);
 	});
+
+// Vérifie si l'utilisateur est connecté
