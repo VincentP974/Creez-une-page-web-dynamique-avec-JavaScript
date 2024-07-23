@@ -7,3 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
             email: document.querySelector('#email').value,
             password: document.querySelector('#password').value,
         };
+        // Envoie d'une requête a l'api pour se connecter
+        fetch('http://localhost:5678/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user),
+        })
