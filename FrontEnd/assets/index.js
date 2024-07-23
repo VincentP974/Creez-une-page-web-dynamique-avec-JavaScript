@@ -335,5 +335,85 @@ document.addEventListener('DOMContentLoaded', function () {
 			console.log(err);
 		});
 
+	// Handling form
+	document.getElementById('modal-edit-work-form').addEventListener('submit', function (event) {
+		event.preventDefault();
+		let formData = new FormData();
+		formData.append('title', document.getElementById('form-title').value);
+		formData.append('category', document.getElementById('form-category').value);
+		formData.append('image', document.getElementById('form-image').files[0]);
+		// New fetch to post new work
+		fetch('http://localhost:5678/api/works', {
+			method: 'POST',
+			headers: {
+				'Authorization': 'Bearer ' + localStorage.getItem('token'),
+			},
+			body: formData
+		})
+			.then(function (response) {
+				switch (response.status) {
+					case 500:
+					case 503:
+						alert("Erreur inattendue!");
+						break;
+					case 400:
+					case 404:
+						alert("Impossible d'ajouter le nouveau projet!");
+						break;
+					case 200:
+					case 201:
+						console.log("Projet ajouté avec succés!");
+						return response.json();
+						break;
+					default:
+						alert("Erreur inconnue!");
+						break;
+				}
+			})
+			.then(function (json) {
+				console.log(json);
+				// Creating HTML element
+				// Creation <figure>
+				let myFigure = document.createElement('figure');
+				myFigure.setAttribute('class', `work-item category-id-0 category-id-${json.categoryId}`);
+				myFigure.setAttribute('id', `work-item-${json.id}`);
+				// Creation <img>
+				let myImg = document.createElement('img');
+				myImg.setAttribute('src', json.imageUrl);
+				myImg.setAttribute('alt', json.title);
+				myFigure.appendChild(myImg);
+				// Creation <figcaption>
+				let myFigCaption = document.createElement('figcaption');
+				myFigCaption.textContent = json.title;
+				myFigure.appendChild(myFigCaption);
+				// Adding the new <figure> into the existing div.gallery
+				document.querySelector("div.gallery").appendChild(myFigure);
+				// Close edit modal
+				let modal = document.getElementById('modal');
+				modal.style.display = "none";
+				let modalEdit = document.getElementById('modal-edit');
+				modalEdit.style.display = "none";
+				// Reset all form in the modal edit 
+				// Delete image if existing
+				if (document.getElementById('form-image-preview') != null) {
+					document.getElementById('form-image-preview').remove();
+				}
+				// Return to original form design
+				document.getElementById('modal-edit-work-form').reset();
+				let iconNewPhoto = document.getElementById('photo-add-icon');
+				iconNewPhoto.style.display = "block";
+				let buttonNewPhoto = document.getElementById('new-image');
+				buttonNewPhoto.style.display = "block";
+				let photoMaxSize = document.getElementById('photo-size');
+				photoMaxSize.style.display = "block";
+				let modalEditPhoto = document.getElementById('modal-edit-new-photo');
+				modalEditPhoto.style.padding = "30px 0 19px 0";
+				document.getElementById('submit-new-work').style.backgroundColor = "#A7A7A7";
+			})
+			.catch(function (err) {
+				console.log(err);
+			});
+	});
+
 
 });
