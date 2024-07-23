@@ -111,7 +111,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		space.style.paddingBottom = "0";
 	});
 	// ouverture de la modale avec le boutton modifier en admin mode
+	document.getElementById('update-works').addEventListener('click', function (event) {
+		event.preventDefault();// New fetch to add all works in the work modal
+		fetch("http://localhost:5678/api/works")
+			.then(function (response) {
+				if (response.ok) {
+					return response.json();
+				}
+			})
 
 
-
-}
+	}
