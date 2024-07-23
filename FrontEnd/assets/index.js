@@ -414,6 +414,35 @@ document.addEventListener('DOMContentLoaded', function () {
 				console.log(err);
 			});
 	});
+	// Check the size of the image file
+	document.getElementById('form-image').addEventListener('change', () => {
+		let fileInput = document.getElementById('form-image');
+		const maxFileSize = 4 * 1024 * 1024; // 4MB
+		if (fileInput.files[0].size > maxFileSize) {
+			alert("Le fichier sélectionné est trop volumineux. La taille maximale est de 4 Mo.");
+			document.getElementById('form-image').value = '';
+		}
+		else {
+			if (fileInput.files.length > 0) {
+				// Creation of the image preview
+				let myPreviewImage = document.createElement('img');
+				myPreviewImage.setAttribute('id', 'form-image-preview');
+				myPreviewImage.src = URL.createObjectURL(fileInput.files[0]);
+				document.querySelector('#modal-edit-new-photo').appendChild(myPreviewImage);
+				myPreviewImage.style.display = "block";
+				myPreviewImage.style.height = "169px";
+				let iconNewPhoto = document.getElementById('photo-add-icon');
+				iconNewPhoto.style.display = "none";
+				let buttonNewPhoto = document.getElementById('new-image');
+				buttonNewPhoto.style.display = "none";
+				let photoMaxSize = document.getElementById('photo-size');
+				photoMaxSize.style.display = "none";
+				let modalEditPhoto = document.getElementById('modal-edit-new-photo');
+				modalEditPhoto.style.padding = "0";
+			}
+		}
+	});
+
 
 
 });
