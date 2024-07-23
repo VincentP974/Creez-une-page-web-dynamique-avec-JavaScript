@@ -324,3 +324,52 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
+/***** Login page *****/
+.typography-for-login-in-user-page {
+	font-weight: 600;
+}
+
+.user-login-formulary form {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+
+.user-login-formulary {
+	width: 50%;
+	margin: auto;
+	padding: 140px 170px 330px 170px;
+}
+
+.user-login-formulary h2 {
+	text-align: center;
+}
+
+.space-between-label-and-input-in-user-login-formulary {
+	padding-bottom: 5px;
+	padding-top: 30px;
+}
+
+.user-login-formulary input {
+	height: 50px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.user-login-formulary input[type="submit"] {
+	margin: 40px auto 30px;
+	height: 36px;
+	display: block;
+	border: none;
+	color: #FFFFFF;
+	border-radius: 60px;
+	font-size: 1em;
+	padding: 10px 39px;
+	min-width: 180px;
+}
+
+.user-login-formulary a {
+	margin: auto;
+	text-decoration: underline;
+}
