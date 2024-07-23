@@ -83,9 +83,10 @@ fetch("http://localhost:5678/api/categories")
 
 // fonction destiné a afficher le contenu du dom 
 document.addEventListener('DOMContentLoaded', function () {
-	// Check token et userId pour vérifier si ils sont bien dans le localStorage
+
+	// Check if the token and userId are present in the localStorage
 	if (localStorage.getItem('token') != null && localStorage.getItem('userId') != null) {
-		//    change le visuel de la page en admin mode
+		// Change the visual of the page in admin mode
 		document.querySelector('body').classList.add('connected');
 		let topBar = document.getElementById('top-bar');
 		topBar.style.display = "flex";
@@ -96,12 +97,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		let introduction = document.getElementById('space-introduction-in-mode-admin');
 		introduction.style.marginTop = "-50px";
 	}
-	// click logout to disconnect
+
+	// Click logout to disconnect
 	document.getElementById('nav-logout').addEventListener('click', function (event) {
 		event.preventDefault();
 		localStorage.removeItem('userId');
 		localStorage.removeItem('token');
-		// changement visuelle de la page quand admin est déconnecté
+		// Changing the page visual when the administrator is disconnected
 		document.querySelector('body').classList.remove(`connected`);
 		let topBar = document.getElementById('top-bar');
 		topBar.style.display = "none";
@@ -110,9 +112,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		let space = document.getElementById('space-only-admin');
 		space.style.paddingBottom = "0";
 	});
-	// ouverture de la modale avec le boutton modifier en admin mode
+
+	// ouverture modale avec boutton modifier en mode admin
 	document.getElementById('update-works').addEventListener('click', function (event) {
-		event.preventDefault();// New fetch to add all works in the work modal
+		event.preventDefault();
+		// New fetch to add all works in the work modal
 		fetch("http://localhost:5678/api/works")
 			.then(function (response) {
 				if (response.ok) {
@@ -123,5 +127,28 @@ document.addEventListener('DOMContentLoaded', function () {
 				let works = data;
 				// Removing old works
 				document.querySelector('#modal-works.modal-gallery .modal-content').innerText = '';
+				// Looping on each work
+				works.forEach((work, index) => {
+					// Creation <figure>
+					let myFigure = document.createElement('figure');
+					myFigure.setAttribute('class', `work-item category-id-0 category-id-${work.categoryId}`);
+					myFigure.setAttribute('id', `work-item-popup-${work.id}`);
+					// Creation <img>
+					let myImg = document.createElement('img');
+					myImg.setAttribute('src', work.imageUrl);
+					myImg.setAttribute('alt', work.title);
+					myFigure.appendChild(myImg);
+					// Creation <figcaption>
+					let myFigCaption = document.createElement('figcaption');
+					myFigCaption.textContent = 'éditer';
+					myFigure.appendChild(myFigCaption);
+					// Creation cross icon
+					let crossDragDrop = document.createElement('i');
+					crossDragDrop.classList.add('fa-solid', 'fa-arrows-up-down-left-right', 'cross');
+					myFigure.appendChild(crossDragDrop);
+					// Creation trash icon
+					let trashIcon = document.createElement('i');
+					trashIcon.classList.add('fa-solid', 'fa-trash-can', 'trash');
+					myFigure.appendChild(trashIcon);
 
-			}
+				});
