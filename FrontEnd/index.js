@@ -1,6 +1,6 @@
 // import des données works depuis l'api
 const reponse = await fetch("http://localhost:5678/api/works")
-	.then(function (response) {
+	.then(function getworks(response) {
 		if (response.ok) {
 			return response.json();
 		}
@@ -35,7 +35,7 @@ const reponse = await fetch("http://localhost:5678/api/works")
 
 // Récupération des Catégories
 fetch("http://localhost:5678/api/categories")
-	.then(function (response) {
+	.then(function getcategories(response) {
 		if (response.ok) {
 			return response.json();
 		}
