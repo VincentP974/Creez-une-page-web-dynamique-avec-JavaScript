@@ -81,4 +81,12 @@ fetch("http://localhost:5678/api/categories")
 		console.log(err);
 	});
 
+// fonction destiné a afficher le contenu du dom 
+document.addEventListener('DOMContentLoaded', function () {
+	// Check token et userId pour vérifier si ils sont bien dans le localStorage
+	if (localStorage.getItem('token') != null && localStorage.getItem('userId') != null) {
+
+	}
+}
+
 // Vérifie si l'utilisateur est connecté
