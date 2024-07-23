@@ -191,6 +191,104 @@ li:hover {
 	color: #B1663C;
 }
 
+li a:hover,
+.user-login-formulary a:hover,
+#top-bar a:hover,
+.container-only-admin a:hover,
+.update-btn:hover {
+	color: #B1663C;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+.insta-logo {
+	width: 19px;
+	height: 19px;
+	margin-top: 5px;
+}
+
+input[type="submit"]:hover,
+button:hover {
+	cursor: pointer;
+}
+
+#introduction p,
+#contact label,
+#contact p,
+.gallery figcaption,
+.user-login-formulary label,
+.user-login-formulary a,
+#modal-edit-work-form label {
+	color: #3D3D3D;
+}
+
+h1>span,
+#introduction p,
+.gallery figcaption,
+#contact p,
+nav a,
+.modal-title,
+.modal-delete-all,
+.modal-content-new-photo p {
+	font-weight: 400;
+}
+
+#contact label,
+.user-login-formulary label,
+.user-login-formulary a,
+#modal-edit-work-form #new-image,
+.modal-content-new-category-title label {
+	font-weight: 500;
+}
+
+h1 .name-of-designer,
+.filters-design,
+#contact input[type="submit"],
+.user-login-formulary input[type="submit"],
+.modal-delete-all,
+#modal-edit-work-form input[type="submit"] {
+	font-family: 'Syne';
+}
+
+.user-login-formulary input[type="submit"],
+#portfolio .filter-active,
+#contact input[type="submit"],
+.modal-add {
+	background-color: #1D6154;
+}
+
+#introduction p,
+#contact label,
+footer li a,
+.user-login-formulary label,
+.user-login-formulary a {
+	line-height: 16px;
+}
+
+#contact form,
+#contact>*,
+.user-login-formulary form,
+.user-login-formulary h2 {
+	min-width: 200px;
+}
+
+.only-guest {
+	display: block;
+}
+
+.only-admin {
+	display: none;
+}
+
+
+/* introduction */
 #introduction {
 	display: flex;
 	align-items: center;
