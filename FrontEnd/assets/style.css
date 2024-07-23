@@ -144,7 +144,7 @@ body {
 
 header {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	margin: 50px 0
 }
 
@@ -158,7 +158,7 @@ h1 {
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: #B1663C;
 }
 
 h1>span {
@@ -299,16 +299,18 @@ footer li a,
 h1 {
 	display: flex;
 	flex-direction: column;
+	margin-right: auto;
 }
 
-h1 .name-of-designer {
+.name-of-designer {
 	font-weight: 800;
 	font-size: 1.6em;
 	line-height: 26px;
 	color: #B1663C;
+	margin-right: 13.4rem;
 }
 
-h1 .job-of-designer {
+.job-of-designer {
 	font-size: 0.680em;
 	line-height: 12px;
 	letter-spacing: 0.1em;
@@ -528,7 +530,7 @@ body.connected .only-admin {
 }
 
 /*** Top-bar ***/
-.top-bar-design {
+#top-bar-design {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -538,20 +540,20 @@ body.connected .only-admin {
 	display: none;
 }
 
-.top-bar-design li {
+#top-bar-design li {
 	padding-left: 10px;
 }
 
-.top-bar-design i {
+#top-bar-design i {
 	padding-right: 10px;
 	font-size: 16px;
 }
 
-.top-bar-design a {
+#top-bar-design a {
 	color: #FFFFFF;
 }
 
-.top-bar-design .publish-btn {
+#top-bar-design .publish-btn {
 	background: #FFFFFF;
 	border-radius: 60px;
 	color: #000000;
