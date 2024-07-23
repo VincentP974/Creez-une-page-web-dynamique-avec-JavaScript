@@ -278,5 +278,39 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.getElementById('submit-new-work').style.backgroundColor = "#A7A7A7";
 	});
 
+	// ouverture de la seconde fenêtre modale avec le boutton "Ajouter photo"
+	document.getElementById('modal-edit-add').addEventListener('click', function (event) {
+		event.preventDefault();
+		let modalWorks = document.getElementById('modal-works');
+		modalWorks.style.display = "none";
+		let modalEdit = document.getElementById('modal-edit');
+		modalEdit.style.display = "block";
+	});
+
+	// Retour a la première fenêtre de la modal avec le fléche retour
+	document.getElementById('arrow-return').addEventListener('click', function (event) {
+		event.preventDefault();
+		let modalWorks = document.getElementById('modal-works');
+		modalWorks.style.display = "block";
+		let modalEdit = document.getElementById('modal-edit');
+		modalEdit.style.display = "none";
+		// Reset all form in the modal edit 
+		// Supprime l'image si elle existe
+		if (document.getElementById('form-image-preview') != null) {
+			document.getElementById('form-image-preview').remove();
+		}
+		// Return to original form design
+		document.getElementById('modal-edit-work-form').reset();
+		let iconNewPhoto = document.getElementById('photo-add-icon');
+		iconNewPhoto.style.display = "block";
+		let buttonNewPhoto = document.getElementById('new-image');
+		buttonNewPhoto.style.display = "block";
+		let photoMaxSize = document.getElementById('photo-size');
+		photoMaxSize.style.display = "block";
+		let modalEditPhoto = document.getElementById('modal-edit-new-photo');
+		modalEditPhoto.style.padding = "30px 0 19px 0";
+		document.getElementById('submit-new-work').style.backgroundColor = "#A7A7A7";
+	});
+
 
 });
