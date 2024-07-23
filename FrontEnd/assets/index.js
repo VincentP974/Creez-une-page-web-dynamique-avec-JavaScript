@@ -205,6 +205,78 @@ document.addEventListener('DOMContentLoaded', function () {
 				console.log(err);
 			});
 	});
+	// Gestion de la fermeture de la modale, se ferme quand on clixk a l'estérieur mais pas à l'intérieur 
+	document.querySelectorAll('#modal-works').forEach(modalWorks => {
+		modalWorks.addEventListener('click', function (event) {
+			event.stopPropagation();
+		});
+		// La modale ne se ferme pas si on clique à l'intérieur 
+		document.querySelectorAll('#modal-edit').forEach(modalEdit => {
+			modalEdit.addEventListener('click', function (event) {
+				event.stopPropagation();
+			});
+			// fermeture des deux fenêtre modale en cliquant à l'extérieur 
+			document.getElementById('modal').addEventListener('click', function (event) {
+				event.preventDefault();
+				let modal = document.getElementById('modal');
+				modal.style.display = "none";
+				let modalWorks = document.getElementById('modal-works');
+				modalWorks.style.display = "none";
+				let modalEdit = document.getElementById('modal-edit');
+				modalEdit.style.display = "none";
+				// Reset all form in the modal edit 
+				// Delete image if existing
+				if (document.getElementById('form-image-preview') != null) {
+					document.getElementById('form-image-preview').remove();
+				}
+				// Return to original form design
+				document.getElementById('modal-edit-work-form').reset();
+				let iconNewPhoto = document.getElementById('photo-add-icon');
+				iconNewPhoto.style.display = "block";
+				let buttonNewPhoto = document.getElementById('new-image');
+				buttonNewPhoto.style.display = "block";
+				let photoMaxSize = document.getElementById('photo-size');
+				photoMaxSize.style.display = "block";
+				let modalEditPhoto = document.getElementById('modal-edit-new-photo');
+				modalEditPhoto.style.padding = "30px 0 19px 0";
+				document.getElementById('submit-new-work').style.backgroundColor = "#A7A7A7";
+			});
+		});
+	});
+
+	// Fermeture de la première fenêtre modale avec boutton "x"
+	document.getElementById('button-to-close-first-window').addEventListener('click', function (event) {
+		event.preventDefault();
+		let modal = document.getElementById('modal');
+		modal.style.display = "none";
+		let modalWorks = document.getElementById('modal-works');
+		modalWorks.style.display = "none";
+	});
+
+	// Fermeture de la deuxiéme fenêtre modale avec boutton "x"
+	document.getElementById('button-to-close-second-window').addEventListener('click', function (event) {
+		event.preventDefault();
+		let modal = document.getElementById('modal');
+		modal.style.display = "none";
+		let modalEdit = document.getElementById('modal-edit');
+		modalEdit.style.display = "none";
+		// Reset all form in the modal edit 
+		// Supprime l'image si elle existe
+		if (document.getElementById('form-image-preview') != null) {
+			document.getElementById('form-image-preview').remove();
+		}
+		// Return to original form design
+		document.getElementById('modal-edit-work-form').reset();
+		let iconNewPhoto = document.getElementById('photo-add-icon');
+		iconNewPhoto.style.display = "block";
+		let buttonNewPhoto = document.getElementById('new-image');
+		buttonNewPhoto.style.display = "block";
+		let photoMaxSize = document.getElementById('photo-size');
+		photoMaxSize.style.display = "block";
+		let modalEditPhoto = document.getElementById('modal-edit-new-photo');
+		modalEditPhoto.style.padding = "30px 0 19px 0";
+		document.getElementById('submit-new-work').style.backgroundColor = "#A7A7A7";
+	});
 
 
 });
