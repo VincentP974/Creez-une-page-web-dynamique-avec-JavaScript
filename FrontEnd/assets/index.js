@@ -312,5 +312,28 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.getElementById('submit-new-work').style.backgroundColor = "#A7A7A7";
 	});
 
+	// Fetch to add category options in modal edit
+	fetch("http://localhost:5678/api/categories")
+		.then(function (response) {
+			if (response.ok) {
+				return response.json();
+			}
+		})
+		.then(function (data) {
+			let categories = data;
+			// Looping on each categories
+			categories.forEach((category, index) => {
+				// Creation <options> in modal edit
+				let myOption = document.createElement('option');
+				myOption.setAttribute('value', category.id);
+				myOption.textContent = category.name;
+				// Adding the new <option> into the existing select.choice-category
+				document.querySelector("select.choice-category").appendChild(myOption);
+			});
+		})
+		.catch(function (err) {
+			console.log(err);
+		});
+
 
 });
