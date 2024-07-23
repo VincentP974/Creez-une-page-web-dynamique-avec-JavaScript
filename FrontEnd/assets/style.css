@@ -245,6 +245,10 @@ li:hover {
 	color: #FFFFFF;
 }
 
+.filter-all {
+	padding-left: 25px;
+	padding-right: 25px;
+}
 
 /* portfolio gallery */
 .gallery {
