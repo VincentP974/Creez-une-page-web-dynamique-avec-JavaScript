@@ -1,9 +1,11 @@
+// import des données works depuis l'api
 const reponse = await fetch("http://localhost:5678/api/works")
 	.then(function (response) {
 		if (response.ok) {
 			return response.json();
 		}
 	})
+	// Si réponse ok
 	.then(function (data) {
 		let works = data;
 		console.log(works);
@@ -26,23 +28,26 @@ const reponse = await fetch("http://localhost:5678/api/works")
 			document.querySelector("div.gallery").appendChild(myFigure);
 		});
 	})
+	// Si la réponse n'est pas valide
 	.catch(function (err) {
 		console.log(err);
 	});
 
-
+// Récupération des Catégories
 fetch("http://localhost:5678/api/categories")
 	.then(function (response) {
 		if (response.ok) {
 			return response.json();
 		}
 	})
+
+	// Si réponse ok alors
 	.then(function (data) {
 		let categories = data;
 		categories.unshift({ id: 0, name: 'Tous' });
 		console.log(categories);
 		// Loop
-		categories.forEach((category, index) => {
+		categories.forEach((category) => {
 			// Creation <button>
 			let myButton = document.createElement('button');
 			myButton.classList.add('work-filter');
@@ -71,6 +76,7 @@ fetch("http://localhost:5678/api/categories")
 			});
 		});
 	})
+	// Si réponse incorrecte 
 	.catch(function (err) {
 		console.log(err);
 	});
