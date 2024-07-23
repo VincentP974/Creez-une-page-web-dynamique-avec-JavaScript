@@ -231,6 +231,16 @@ li:hover {
 	padding: 50px 0;
 }
 
+.filters-design {
+	margin-left: 10px;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	font-size: 1.15em;
+	color: #1D6154;
+	background-color: rgb(246, 246, 235);
+	padding: 7px 15px;
+}
+
 /* portfolio gallery */
 .gallery {
 	width: 100%;
