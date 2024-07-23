@@ -87,8 +87,23 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (localStorage.getItem('token') != null && localStorage.getItem('userId') != null) {
 		//    change le visuel de la page en admin mode
 		document.querySelector('body').classList.add('connected');
+		let topBar = document.getElementById('top-bar');
+		topBar.style.display = "flex";
+		let filters = document.getElementById('all-filters');
+		filters.style.display = "none";
+		let space = document.getElementById('space-only-admin');
+		space.style.paddingBottom = "100px";
+		let introduction = document.getElementById('space-introduction-in-mode-admin');
+		introduction.style.marginTop = "-50px";
+	}
+	// click logout to disconnect
+	document.getElementById('nav-logout').addEventListener('click', function (event) {
+		event.preventDefault();
+		localStorage.removeItem('userId');
+		localStorage.removeItem('token');
+
+
 
 	}
-}
 
-// Vérifie si l'utilisateur est connecté
+
