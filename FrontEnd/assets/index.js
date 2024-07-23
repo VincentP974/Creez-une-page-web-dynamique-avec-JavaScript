@@ -443,6 +443,22 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
+	// lien de checkNewProjectFields() function au 3 eventlistener de type input
+	document.getElementById('form-title').addEventListener('input', checkNewProjectFields);
+	document.getElementById('form-category').addEventListener('input', checkNewProjectFields);
+	document.getElementById('form-image').addEventListener('input', checkNewProjectFields);
 
+	//creation de checkNewProjectFields() function qui vérifie le titre, la catégorie et l'image
+	function checkNewProjectFields() {
+		let title = document.getElementById('form-title');
+		let category = document.getElementById('form-category');
+		let image = document.getElementById('form-image');
+		let submitWork = document.getElementById('submit-new-work');
+		if (title.value.trim() === "" || category.value.trim() === "" || image.files.length === 0) {
+			submitWork.style.backgroundColor = "#A7A7A7";
+		} else {
+			submitWork.style.backgroundColor = "#1D6154";
+		}
+	};
 
 });
