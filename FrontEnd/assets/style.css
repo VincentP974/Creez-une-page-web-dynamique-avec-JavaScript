@@ -316,12 +316,6 @@ h1 .job-of-designer {
 	color: #B1663C;
 }
 
-nav ul {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-
 nav li {
 	padding-left: 50px;
 }

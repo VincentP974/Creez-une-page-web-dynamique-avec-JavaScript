@@ -1,6 +1,6 @@
 // import des données works depuis l'api
 const reponse = await fetch("http://localhost:5678/api/works")
-	.then(function getworks(response) {
+	.then(function (response) {
 		if (response.ok) {
 			return response.json();
 		}
@@ -10,7 +10,7 @@ const reponse = await fetch("http://localhost:5678/api/works")
 		let works = data;
 		console.log(works);
 		// Loop
-		works.forEach((work) => {
+		works.forEach((work, index) => {
 			// Creation <figure>
 			let myFigure = document.createElement('figure');
 			myFigure.setAttribute('class', `work-item category-id-0 category-id-${work.categoryId}`);
