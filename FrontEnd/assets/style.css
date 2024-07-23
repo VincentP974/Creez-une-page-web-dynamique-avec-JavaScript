@@ -373,3 +373,12 @@ footer nav ul {
 	margin: auto;
 	text-decoration: underline;
 }
+
+/***** CSS admin mode only *****/
+body.connected .only-guest {
+	display: none;
+}
+
+body.connected .only-admin {
+	display: block;
+}
