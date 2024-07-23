@@ -151,4 +151,46 @@ document.addEventListener('DOMContentLoaded', function () {
 					trashIcon.classList.add('fa-solid', 'fa-trash-can', 'trash');
 					myFigure.appendChild(trashIcon);
 
+					// gestion de la suppression d'un élément
+					trashIcon.addEventListener('click', function (event) {
+						event.preventDefault();
+						if (confirm("Voulez-vous supprimer cet élément ?")) {
+							// Fetch to delete work in the work modal and in the portfolio gallery of the page
+							fetch(`http://localhost:5678/api/works/${work.id}`, {
+								method: 'DELETE',
+								headers: {
+									'Content-Type': 'application/json',
+									'Authorization': 'Bearer ' + localStorage.getItem('token')
+								}
+							})
+								.then(function (response) {
+									switch (response.status) {
+										case 500:
+										case 503:
+											alert("Comportement inattendu!");
+											break;
+										case 401:
+											alert("Suppresion impossible!");
+											break;
+										case 200:
+										case 204:
+											console.log("Projet supprimé.");
+											// Deleting work from the page
+											document.getElementById(`work-item-${work.id}`).remove();
+											console.log(`work-item-${work.id}`);
+											// Deleting work from the popup
+											document.getElementById(`work-item-popup-${work.id}`).remove();
+											console.log(`work-item-popup-${work.id}`);
+											break;
+										default:
+											alert("Erreur inconnue!");
+											break;
+									}
+								})
+								.catch(function (err) {
+									console.log(err);
+								});
+						}
+					});
+
 				});
