@@ -192,5 +192,19 @@ document.addEventListener('DOMContentLoaded', function () {
 								});
 						}
 					});
-
+					// Adding the new <figure> into the existing div.modal-content
+					document.querySelector("div.modal-content").appendChild(myFigure);
+					// Opening work modal 
+					let modal = document.getElementById('modal');
+					modal.style.display = "flex";
+					let modalWorks = document.getElementById('modal-works');
+					modalWorks.style.display = "block";
 				});
+			})
+			.catch(function (err) {
+				console.log(err);
+			});
+	});
+
+
+});
