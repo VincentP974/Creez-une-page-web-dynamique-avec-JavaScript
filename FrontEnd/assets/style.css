@@ -413,3 +413,17 @@ body.connected .only-admin {
 	color: #000000;
 	padding: 9px 23px;
 }
+
+/*** Click "modifier" to open modal ***/
+.container-only-admin {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+}
+
+.update-btn i {
+	padding-right: 10px;
+	font-size: 20px;
+}
