@@ -1,85 +1,104 @@
-// import des données works depuis l'api
-const reponse = await fetch("http://localhost:5678/api/works")
-	.then(function (response) {
-		if (response.ok) {
-			return response.json();
+// Variable globale pour stocker les travaux afin d'éviter des requêtes API multiples inutiles.
+let globalWorks = null;
+
+// Fonction asynchrone pour récupérer les travaux depuis l'API.
+async function getWorks() {
+	// Vérifie si les travaux ont déjà été récupérés et stockés dans la variable globale.
+	if (!globalWorks) {
+		try {
+			// Effectue la requête à l'API.
+			const response = await fetch("http://localhost:5678/api/works");
+			// Vérifie si la réponse est valide.
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			// Convertit la réponse en JSON et la stocke dans la variable globale.
+			globalWorks = await response.json();
+			console.log("Works fetched:", globalWorks);
+		} catch (error) {
+			console.error("Failed to fetch works:", error.message);
+			// Assigner un tableau vide en cas d'échec de la récupération des données.
+			globalWorks = [];
 		}
-	})
-	// Si réponse ok
-	.then(function (data) {
-		let works = data;
-		console.log(works);
-		// Loop
-		works.forEach((work, index) => {
-			// Creation <figure>
-			let myFigure = document.createElement('figure');
-			myFigure.setAttribute('class', `work-item category-id-0 category-id-${work.categoryId}`);
-			myFigure.setAttribute('id', `work-item-${work.id}`);
-			// Creation <img>
-			let myImg = document.createElement('img');
-			myImg.setAttribute('src', work.imageUrl);
-			myImg.setAttribute('alt', work.title);
-			myFigure.appendChild(myImg);
-			// Creation <figcaption>
-			let myFigCaption = document.createElement('figcaption');
-			myFigCaption.textContent = work.title;
-			myFigure.appendChild(myFigCaption);
-			// Adding <figure> into div.gallery
-			document.querySelector("div.gallery").appendChild(myFigure);
+	}
+	// Retourne les travaux stockés.
+	return globalWorks;
+}
+
+// Fonction asynchrone pour récupérer les catégories depuis l'API.
+async function getCategories() {
+	// Requête pour récupérer les catégories.
+	const categories = await fetch("http://localhost:5678/api/categories");
+	console.log(categories);
+	const categoriesJson = await categories.json();
+	console.log(categoriesJson);
+	return categoriesJson;
+}
+// Fonction pour afficher les catégories dans l'interface utilisateur.
+async function displayCategories() {
+	const categories = await getCategories();
+	// Ajoute une option "Tous" pour permettre l'affichage de tous les travaux.
+	categories.unshift({ id: 0, name: "Tous" });
+	const filtersContainer = document.querySelector("#filter-container");
+	filtersContainer.innerHTML = ""; // Vide les filtres existants pour éviter les duplications lors de l'affichage
+
+	categories.forEach((cat) => {
+		const filterElement = document.createElement("div");
+		filterElement.classList.add("filter-item");
+		filterElement.innerText = cat.name;
+		filterElement.addEventListener("click", () => {
+			// Supprime la classe 'selected' de tous les éléments pour s'assurer que seul l'élément actif l'ait
+			document
+				.querySelectorAll(".filter-item")
+				.forEach((item) => item.classList.remove("selected"));
+			filterElement.classList.add("selected"); // Ajoute la classe 'selected' à l'élément cliqué
+			filterWorks(cat.id); // Filtre les travaux en fonction de la catégorie sélectionnée
 		});
-	})
-	// Si la réponse n'est pas valide
-	.catch(function (err) {
-		console.log(err);
+		filtersContainer.appendChild(filterElement);
 	});
 
-// Récupération des Catégories
-fetch("http://localhost:5678/api/categories")
-	.then(function getcategories(response) {
-		if (response.ok) {
-			return response.json();
-		}
-	})
+	// Sélectionne par défaut le premier élément 'Tous'
+	filtersContainer.firstChild.classList.add("selected");
+}
 
-	// Si réponse ok alors
-	.then(function (data) {
-		let categories = data;
-		categories.unshift({ id: 0, name: 'Tous' });
-		console.log(categories);
-		// Loop
-		categories.forEach((category) => {
-			// Creation <button>
-			let myButton = document.createElement('button');
-			myButton.classList.add('work-filter');
-			myButton.classList.add('filters-design');
-			if (category.id === 0) myButton.classList.add('filter-active', 'filter-all');
-			myButton.setAttribute('data-filter', category.id);
-			myButton.textContent = category.name;
-			// Adding new <button> into div.filters
-			document.querySelector("div.filters").appendChild(myButton);
-			// Click event <buttton> 
-			myButton.addEventListener('click', function (event) {
-				event.preventDefault();
-				// filter
-				document.querySelectorAll('.work-filter').forEach((workFilter) => {
-					workFilter.classList.remove('filter-active');
-				});
-				event.target.classList.add('filter-active');
-				//works
-				let categoryId = myButton.getAttribute('data-filter');
-				document.querySelectorAll('.work-item').forEach(workItem => {
-					workItem.style.display = 'none';
-				});
-				document.querySelectorAll(`.work-item.category-id-${categoryId}`).forEach(workItem => {
-					workItem.style.display = 'block';
-				});
-			});
-		});
-	})
-	// Si réponse incorrecte 
-	.catch(function (err) {
-		console.log(err);
-	});
+// Fonction pour filtrer les travaux par catégorie.
+async function filterWorks(categoryId) {
+	const works = await getWorks();
+	// Si l'ID de la catégorie est 0, afficher tous les travaux.
+	if (categoryId === 0) {
+		displayFilteredWorks(works);
+		return;
+	}
+	// Filtrer les travaux selon la catégorie sélectionnée.
+	const filteredWorks = works.filter(
+		(travail) => travail.category.id === categoryId
+	);
+	displayFilteredWorks(filteredWorks);
+}
+
+// Affiche les travaux filtrés dans la galerie
+async function displayFilteredWorks(filteredWorks = null) {
+	const galleryElement = document.querySelector(".gallery");
+	// Vide la galerie avant d'ajouter les nouveaux éléments pour éviter les duplications
+	galleryElement.innerHTML = "";
+
+	// Si aucun travail filtré n'est fourni, récupère tous les travaux
+	if (filteredWorks == null) {
+		filteredWorks = await getWorks();
+	}
+
+	// Crée et ajoute chaque élément de travail à la galerie
+	for (let travail of filteredWorks) {
+		const figureElement = document.createElement("figure");
+		const figcaptionElement = document.createElement("figcaption");
+		const imgElement = document.createElement("img");
+		imgElement.src = travail.imageUrl;
+		figcaptionElement.innerText = travail.title;
+		figureElement.appendChild(imgElement);
+		figureElement.appendChild(figcaptionElement);
+		galleryElement.appendChild(figureElement);
+	}
+}
 
 // Vérifie si l'utilisateur est connecté
 function isConnected() {
@@ -103,6 +122,7 @@ function handleLoginButton() {
 		});
 	}
 }
+
 // Affiche ou cache les éléments administratifs en fonction de l'état de connexion
 function handleAdminElements() {
 	const adminElements = document.querySelectorAll(".admin-element");
