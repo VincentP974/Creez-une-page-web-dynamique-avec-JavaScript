@@ -16,38 +16,31 @@
 
 <body>
 	<header>
-		<nav id="top-bar-design">
-			<ul>
-				<li><a href="#"><i class="fa-sharp fa-regular fa-pen-to-square"></i>Mode édition</a></li>
-				<li><a href="#" class="publish-btn">publier les changements</a></li>
-			</ul>
-		</nav>
+		<div id="header-edit">
+			<div class="edit"><i class="fa-regular fa-pen-to-square"></i>
+				<p>Mode édition</p>
+			</div>
+		</div>
+		<div id="header-top">
 
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li><a href="#portfolio">projets</a></li>
-				<li><a href="#contact">contact</a></li>
-				<li>
-					<a class="only-guest" href="login.html">login</a>
-					<a id="nav-logout" class="only-admin" href="#">logout</a>
-				</li>
-				<li id="instagram"><img src="./assets/icons/instagram.png" href="https://www.instagram.com/"
-						alt="Instagram"></li>
-			</ul>
-		</nav>
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li><a href="#portfolio">projets</a></li>
+					<li><a href="#contact">contact</a></li>
+					<li><a class="only-guest" id="login-button" href="login.html">login</a></li>
+					<li id="instagram"><img src="./assets/icons/instagram.png" href="https://www.instagram.com/"
+							alt="Instagram"></li>
+				</ul>
+			</nav>
 	</header>
 	<main>
 
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="sophie-bluel">
-				<a id="update-img" class="only-admin update-btn" href="#"><i
-						class="fa-sharp fa-regular fa-pen-to-square"></i>modifier</a>
 			</figure>
-			<article id="space-introduction-in-mode-admin">
-				<a id="update-description" class="only-admin update-btn" href="#"><i
-						class="fa-sharp fa-regular fa-pen-to-square"></i>modifier</a>
+			<article>
 				<h2>Designer d'espace</h2>
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
 					finale du chantier.</p>
@@ -61,7 +54,12 @@
 
 		<section id="portfolio">
 			<h2>Mes Projets</h2>
-			<div id="all-filters" class="filters"></div>
+			<!-- Bouton d'édition -->
+			<div id="edit-works">
+				<i class="fa-regular fa-pen-to-square"></i><span>modifier</span>
+			</div>
+			<!-- Fin du bouton d'édition -->
+			<div id="filter-container" class="filters"></div>
 			<div class="gallery"></div>
 		</section>
 		<section id="contact">
