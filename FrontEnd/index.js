@@ -4,14 +4,12 @@ let globalWorks = null;
 // Fonction asynchrone pour récupérer les travaux depuis l'API.
 async function getWorks() {
 	// Vérifie si les travaux ont déjà été récupérés et stockés dans la variable globale.
-	if (!globalWorks) {
+	if (globalWorks === null) {
 		try {
 			// Effectue la requête à l'API.
 			const response = await fetch("http://localhost:5678/api/works");
 			// Vérifie si la réponse est valide.
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`);
-			}
+			if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 			// Convertit la réponse en JSON et la stocke dans la variable globale.
 			globalWorks = await response.json();
 			console.log("Works fetched:", globalWorks);
