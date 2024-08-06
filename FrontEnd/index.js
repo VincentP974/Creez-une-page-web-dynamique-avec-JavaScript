@@ -77,12 +77,10 @@ async function displayFilteredWorks(filteredWorks = null) {
 	galleryElement.innerHTML = "";
 
 	// Si aucun travail filtré n'est fourni, récupère tous les travaux
-	if (filteredWorks == null) {
-		filteredWorks = await getWorks();
-	}
+	const works = filteredWorks ?? await getWorks();
 
 	// Crée et ajoute chaque élément de travail à la galerie
-	for (let travail of filteredWorks) {
+	works.forEach(travail => {
 		const figureElement = document.createElement("figure");
 		const figcaptionElement = document.createElement("figcaption");
 		const imgElement = document.createElement("img");
@@ -91,7 +89,7 @@ async function displayFilteredWorks(filteredWorks = null) {
 		figureElement.appendChild(imgElement);
 		figureElement.appendChild(figcaptionElement);
 		galleryElement.appendChild(figureElement);
-	}
+	});
 }
 
 // Vérifie si l'utilisateur est connecté
