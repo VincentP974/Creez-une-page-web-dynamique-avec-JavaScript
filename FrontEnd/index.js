@@ -25,12 +25,15 @@ async function getWorks() {
 
 // Fonction asynchrone pour récupérer les catégories depuis l'API.
 async function getCategories() {
-	// Requête pour récupérer les catégories.
-	const categories = await fetch("http://localhost:5678/api/categories");
-	console.log(categories);
-	const categoriesJson = await categories.json();
-	console.log(categoriesJson);
-	return categoriesJson;
+	try {
+		// Requête pour récupérer les catégories.
+		const response = await fetch("http://localhost:5678/api/categories");
+		if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+		return await response.json();
+	} catch (error) {
+		console.error("Failed to fetch categories:", error.message);
+		return [];
+	}
 }
 // Fonction pour afficher les catégories dans l'interface utilisateur.
 async function displayCategories() {
