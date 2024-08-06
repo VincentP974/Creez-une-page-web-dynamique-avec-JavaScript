@@ -101,32 +101,23 @@ function isConnected() {
 // Gère le bouton de connexion/déconnexion en fonction de l'état de connexion
 function handleLoginButton() {
 	const loginButton = document.querySelector("#login-button");
-	if (isConnected()) {
-		loginButton.innerText = "logout";
-		loginButton.addEventListener("click", () => {
+	loginButton.innerText = isConnected() ? "logout" : "login";
+	loginButton.addEventListener("click", () => {
+		if (isConnected()) {
 			sessionStorage.removeItem("token");
 			window.location.href = "./index.html"; // Redirige vers l'accueil après déconnexion
-		});
-	} else {
-		loginButton.innerText = "login";
-		loginButton.addEventListener("click", () => {
+		} else {
 			window.location.href = "./login.html"; // Redirige vers la page de connexion
-		});
-	}
+		}
+	});
 }
 
 // Affiche ou cache les éléments administratifs en fonction de l'état de connexion
 function handleAdminElements() {
 	const adminElements = document.querySelectorAll(".admin-element");
-	if (isConnected()) {
-		adminElements.forEach((element) => {
-			element.classList.remove("hidden"); // Affiche les éléments
-		});
-	} else {
-		adminElements.forEach((element) => {
-			element.classList.add("hidden"); // Cache les éléments
-		});
-	}
+	adminElements.forEach(element => {
+		element.classList.toggle("hidden", !isConnected()); // Affiche ou cache les éléments
+	});
 }
 
 // Ajuste l'affichage de certains éléments du DOM en fonction de l'état de connexion
