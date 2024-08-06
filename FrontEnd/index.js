@@ -65,15 +65,8 @@ async function displayCategories() {
 // Fonction pour filtrer les travaux par catégorie.
 async function filterWorks(categoryId) {
 	const works = await getWorks();
-	// Si l'ID de la catégorie est 0, afficher tous les travaux.
-	if (categoryId === 0) {
-		displayFilteredWorks(works);
-		return;
-	}
-	// Filtrer les travaux selon la catégorie sélectionnée.
-	const filteredWorks = works.filter(
-		(travail) => travail.category.id === categoryId
-	);
+	// Si l'ID de la catégorie est 0, afficher tous les travaux.//else filtre travaux selon catégorie sélectionnée
+	const filteredWorks = categoryId === 0 ? works : works.filter(travail => travail.category.id === categoryId);
 	displayFilteredWorks(filteredWorks);
 }
 
