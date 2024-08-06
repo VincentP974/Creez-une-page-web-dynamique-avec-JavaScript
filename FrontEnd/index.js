@@ -144,12 +144,7 @@ function adjustDisplayBasedOnLogin() {
 document.addEventListener("DOMContentLoaded", () => {
 	adjustDisplayBasedOnLogin();
 	handleLoginButton();
-});
-
-// Fonction principale qui initialise toutes les autres au chargement de la page
-(function main() {
-	handleLoginButton();
 	displayFilteredWorks();
 	displayCategories();
 	handleAdminElements();
-})();
+});
