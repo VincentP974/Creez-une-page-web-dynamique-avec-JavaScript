@@ -147,31 +147,6 @@ header {
 	width: auto;
 }
 
-#header-edit {
-	display: flex;
-	justify-content: center;
-	padding: 20px 0;
-	margin-top: 0;
-	background-color: black;
-	color: white;
-}
-
-.edit {
-	display: flex;
-	flex-direction: row;
-	gap: 12px;
-}
-
-#header-top {
-	display: flex;
-	justify-content: space-between;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50px;
-	padding: 0 150px;
-	width: 1140px;
-}
-
 main {
 	width: 950px;
 	margin: auto;
@@ -265,6 +240,34 @@ li:hover {
 	text-align: center;
 }
 
+/* ajout de style à la barre d'édition */
+#header-edit {
+	display: flex;
+	justify-content: center;
+	padding: 20px 0;
+	margin-top: 0;
+	background-color: black;
+	color: white;
+}
+
+.edit {
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+}
+
+/* Ajout de style au "logo" Sophie Bluel */
+#header-top {
+	display: flex;
+	justify-content: space-between;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	padding: 0 150px;
+	width: 1140px;
+}
+
+/* gallery */
 .gallery {
 	width: 100%;
 	display: grid;
@@ -277,6 +280,36 @@ li:hover {
 	width: 100%;
 }
 
+/* filtres */
+#filter-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+/* Style pour les boutons de filtre normaux */
+.filter-item {
+	display: inline-flex;
+	border: 1px solid #1d6154;
+	color: #1d6154;
+	padding: 9px 1em;
+	border-radius: 20px;
+}
+
+/* Style pour l'éléments de filtre actif */
+.filter-item.selected {
+	display: inline-flex;
+	border: 1px solid #1d6154;
+	background-color: #1d6154;
+	color: white;
+	padding: 9px 1em;
+	border-radius: 20px;
+}
+
+/* Formulaire de contacte et boutton envoyé */
 #contact,
 #login {
 	width: 50%;
@@ -331,6 +364,18 @@ input[type="submit"] {
 	border-radius: 60px;
 }
 
+#forgot-password {
+	text-align: center;
+	margin-top: 28px;
+	margin-bottom: 355px;
+	text-decoration: underline;
+}
+
+/* cache les éléments admin */
+.hidden {
+	display: none !important;
+}
+
 footer {
 	background-color: white;
 	height: 60px;
@@ -342,47 +387,7 @@ footer nav ul {
 	margin-right: 107px;
 }
 
-#filter-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	border-radius: 5px;
-	padding: 10px;
-}
-
-/* Style pour les boutons de filtre normaux */
-.filter-item {
-	display: inline-flex;
-	border: 1px solid #1d6154;
-	color: #1d6154;
-	padding: 9px 1em;
-	border-radius: 20px;
-}
-
-/* Style pour l'éléments de filtre actif */
-.filter-item.selected {
-	display: inline-flex;
-	border: 1px solid #1d6154;
-	background-color: #1d6154;
-	color: white;
-	padding: 9px 1em;
-	border-radius: 20px;
-}
-
-#forgot-password {
-	text-align: center;
-	margin-top: 28px;
-	margin-bottom: 355px;
-	text-decoration: underline;
-}
-
-.hidden {
-	display: none !important;
-}
-
 /*********** Modal ***********/
-
 #title-project {
 	display: flex;
 	justify-content: center;
