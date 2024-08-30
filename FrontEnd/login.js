@@ -21,10 +21,11 @@ function login() {
     })
         .then((response) => {
             if (!response.ok) {
-                // Si le statut de la réponse n'est pas OK (200), lance une erreur
-                throw new Error(
-                    "L’authentification a échoué. Veuillez vérifier votre identifiant et votre mot de passe et réessayer."
-                );
+                // Récupérer le message d'erreur du serveur, s'il existe, pour le passer au bloc catch
+                return response.json().then(errorData => {
+                    const errorMessage = errorData.message || "Identifiant ou mot de passe incorrect.";
+                    throw new Error(errorMessage);
+                });
             }
             return response.json(); // Analyse le corps de la réponse en tant que JSON
         })
@@ -33,6 +34,7 @@ function login() {
             window.location.href = "./index.html"; // Redirige l'utilisateur vers la page index.html
         })
         .catch((error) => {
-            alert("Identifiant ou mot de passe incorrect"); // Affiche une alerte s'il y a une erreur
+            console.error("Identiffiant ou mot de passe incorrecte:", error.message);
+            alert(error.message);
         });
 }
